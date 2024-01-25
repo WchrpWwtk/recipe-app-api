@@ -1,13 +1,14 @@
 FROM python:3.12.1-alpine3.19
 
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 
-COPY ./app /app
+COPY ./recipes /recipes
 
-WORKDIR /app
+WORKDIR /recipes
 
 EXPOSE 8000
 
