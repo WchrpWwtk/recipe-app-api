@@ -10,4 +10,5 @@ services:
       - "8003:8000"
     volumes:
       - ./recipes:/recipes
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
