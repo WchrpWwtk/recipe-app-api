@@ -1,6 +1,7 @@
 """
 Tests for models.
 """
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
@@ -17,10 +18,7 @@ class ModelTests(TestCase):
         """
         email = "test@example.com"
         password = "test_pass123"
-        user = get_user_model().objects.create_user(
-            email=email,
-            password=password
-        )
+        user = get_user_model().objects.create_user(email=email, password=password)
 
         self.assertEqual(user.email, email)
         self.assertTrue(user.check_password(password))
@@ -34,7 +32,7 @@ class ModelTests(TestCase):
             ["test1@EXAMPLE.com", "test1@example.com"],
             ["Test2@Example.com", "Test2@example.com"],
             ["TEST3@EXAMPLE.COM", "TEST3@example.com"],
-            ["test4@example.COM", "test4@example.com"]
+            ["test4@example.COM", "test4@example.com"],
         ]
 
         for email, expected in sample_emails:
@@ -50,10 +48,7 @@ class ModelTests(TestCase):
         Test creating a superuser.
         :return:
         """
-        user = get_user_model().objects.create_superuser(
-            "test@example.com",
-            "test123"
-        )
+        user = get_user_model().objects.create_superuser("test@example.com", "test123")
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)

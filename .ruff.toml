@@ -1,0 +1,13 @@
+line-length = 79
+exclude = [
+    "migrations",
+    "__pycache__",
+    "manage.py",
+    "settings.py"
+]
+
+[lint]
+extend-select = ["E501"]
+
+[lint.pydocstyle]
+convention = "google"
