@@ -6,6 +6,8 @@ ENV PYTHONUNBUFFERED=1
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
+RUN mkdir -p /app/.ruff_cache && \
+    chmod -R 777 /app/.ruff_cache
 WORKDIR /app
 EXPOSE 8000
 

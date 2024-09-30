@@ -8,6 +8,7 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app
+      - ruff_cache:/app/.ruff_cache
     command: >
       sh -c "python manage.py wait_for_db && 
              python manage.py migrate && 
@@ -30,4 +31,9 @@ services:
       - POSTGRES_PASSWORD=changeme
 
 volumes:
+  ruff_cache:
+    driver_opts:
+      type: 'tmpfs'
+      device: 'tmpfs'
+      o: 'uid=1000,gid=1000,mode=1777'
   dev-db-data:
