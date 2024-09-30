@@ -1,4 +1,3 @@
-line-length = 79
 exclude = [
     "migrations",
     "__pycache__",
@@ -7,7 +6,4 @@ exclude = [
 ]
 
 [lint]
-extend-select = ["E501"]
-
-[lint.pydocstyle]
-convention = "google"
+line-length = 79
