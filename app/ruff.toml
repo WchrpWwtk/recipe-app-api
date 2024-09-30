@@ -1,3 +1,4 @@
+line-length = 79
 exclude = [
     "migrations",
     "__pycache__",
@@ -6,4 +7,6 @@ exclude = [
 ]
 
 [lint]
-line-length = 79
+extend-select = [
+    "E501"
+]
