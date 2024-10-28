@@ -3,7 +3,6 @@ Tests for recipe APIs.
 """
 
 from decimal import Decimal
-from typing import LiteralString
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
