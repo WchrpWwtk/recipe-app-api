@@ -11,34 +11,34 @@ from . import serializers
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
-	"""
-	View for manage recipe APIs.
-	"""
+    """
+    View for manage recipe APIs.
+    """
 
-	serializer_class = serializers.RecipeDetailSerializer
-	queryset = Recipe.objects.all()
-	authentication_classes = [TokenAuthentication]
-	permission_classes = [IsAuthenticated]
+    serializer_class = serializers.RecipeDetailSerializer
+    queryset = Recipe.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
-	def get_queryset(self):
-		"""
-		Retrieve recipes for authenticated user.
-		:return:
-		"""
-		return self.queryset.filter(user=self.request.user).order_by("-id")
+    def get_queryset(self):
+        """
+        Retrieve recipes for authenticated user.
+        :return:
+        """
+        return self.queryset.filter(user=self.request.user).order_by("-id")
 
-	def get_serializer_class(self):
-		"""
-		Return the serializer class for the request.
-		"""
+    def get_serializer_class(self):
+        """
+        Return the serializer class for the request.
+        """
 
-		if self.action == "list":
-			return serializers.RecipeSerializer
+        if self.action == "list":
+            return serializers.RecipeSerializer
 
-		return self.serializer_class
+        return self.serializer_class
 
-	def perform_create(self, serializer):
-		"""
-		Create a new recipe.
-		"""
-		serializer.save(user=self.request.user)
+    def perform_create(self, serializer):
+        """
+        Create a new recipe.
+        """
+        serializer.save(user=self.request.user)
