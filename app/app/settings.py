@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 	"user.apps.UserConfig",
 	"recipe.apps.RecipeConfig",
 	"tag.apps.TagConfig",
+	"ingredient.apps.IngredientConfig",
 	"rest_framework",
 	"rest_framework.authtoken",
 	"drf_spectacular",

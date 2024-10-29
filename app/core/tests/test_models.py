@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 
 from recipe.models import Recipe
 from tag.models import Tag
+from ingredient.models import Ingredient
 
 
 def create_user(email="user@example.com", password="testpass123"):
@@ -95,3 +96,13 @@ class ModelTests(TestCase):
         tag = Tag.objects.create(user=user, name="Tag1")
 
         self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingredient(self):
+        """
+        Test creating an ingredient is successful.
+        :return:
+        """
+        user = create_user()
+        ingredient = Ingredient.objects.create(user=user, name="Ingredient 1")
+
+        self.assertEqual(str(ingredient), ingredient.name)
