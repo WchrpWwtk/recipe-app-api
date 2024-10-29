@@ -483,6 +483,58 @@ class PrivateRecipeApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(recipe.ingredients.count(), 0)
 
+    def test_filter_by_tags(self):
+        """
+        Test filtering recipes by tags.
+        :return:
+        """
+        r_1 = create_recipe(user=self.user, title="Thai Vegetable Curry")
+        r_2 = create_recipe(user=self.user, title="Aubergine with Tahini")
+        tag_1 = Tag.objects.create(user=self.user, name="Vegan")
+        tag_2 = Tag.objects.create(user=self.user, name="Vegetarian")
+
+        r_1.tags.add(tag_1)
+        r_2.tags.add(tag_2)
+
+        r_3 = create_recipe(user=self.user, title="Fish and chips")
+
+        params = {"tags": f"{tag_1.id},{tag_2.id}"}
+        res = self.client.get(RECIPE_URL, params)
+
+        s_1 = RecipeSerializer(r_1)
+        s_2 = RecipeSerializer(r_2)
+        s_3 = RecipeSerializer(r_3)
+
+        self.assertIn(s_1.data, res.data)
+        self.assertIn(s_2.data, res.data)
+        self.assertNotIn(s_3.data, res.data)
+
+    def test_filter_by_ingredients(self):
+        """
+        Test filtering recipes by ingredients.
+        :return:
+        """
+        r_1 = create_recipe(user=self.user, title="Posh Beans on Toast")
+        r_2 = create_recipe(user=self.user, title="Chicken Caciatore")
+        in_1 = Ingredient.objects.create(user=self.user, name="Feta Cheese")
+        in_2 = Ingredient.objects.create(user=self.user, name="Chicken")
+
+        r_1.ingredients.add(in_1)
+        r_2.ingredients.add(in_2)
+
+        r_3 = create_recipe(user=self.user, title="Red Lentil Daal")
+
+        params = {"ingredients": f"{in_1.id}, {in_2.id}"}
+        res = self.client.get(RECIPE_URL, params)
+
+        s_1 = RecipeSerializer(r_1)
+        s_2 = RecipeSerializer(r_2)
+        s_3 = RecipeSerializer(r_3)
+
+        self.assertIn(s_1.data, res.data)
+        self.assertIn(s_2.data, res.data)
+        self.assertNotIn(s_3.data, res.data)
+
 
 class ImageUploadTests(TestCase):
     """
